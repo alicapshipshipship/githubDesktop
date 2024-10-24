@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="style">
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;  /* Add this line */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        .button {
+            padding: 25px 40px;
+            font-size: 23px;
+            background-color: #E5EBEB;
+            color: #003E39;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.1s;
+            font-family: 'YourFontName', sans-serif; /* Apply custom font to button */
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            background-color: #003E39; /* Updated background color */
+            color: #ffffff; /* Updated text color */
+        }
+
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        .popup-image {
+            position: fixed;
+            width: 140px;  /* Adjust size as needed */
+            height: 140px; /* Adjust size as needed */
+            pointer-events: none;
+            object-fit: contain;
+        }
+
+        .bounce-left {
+            animation: bounceLeft 5s ease-out forwards;
+        }
+
+        .bounce-right {
+            animation: bounceRight 5s ease-out forwards;
+        }
+
+        @keyframes bounceLeft {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            15% {
+                transform: translate(-200px, -300px) scale(1);
+                opacity: 1;
+            }
+            30% {
+                transform: translate(-400px, 0) scale(1);
+                opacity: 1;
+            }
+            45% {
+                transform: translate(-400px, -150px) scale(1);
+                opacity: 1;
+            }
+            60% {
+                transform: translate(-400px, 0) scale(1);
+                opacity: 1;
+            }
+            75% {
+                transform: translate(-400px, -75px) scale(1);
+                opacity: 1;
+            }
+            90% {
+                transform: translate(-400px, 0) scale(1);
+                opacity: 1;
+            }
+            95% {
+                transform: translate(-400px, -25px) scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(-400px, 0) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bounceRight {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            15% {
+                transform: translate(200px, -300px) scale(1);
+                opacity: 1;
+            }
+            30% {
+                transform: translate(400px, 0) scale(1);
+                opacity: 1;
+            }
+            45% {
+                transform: translate(400px, -150px) scale(1);
+                opacity: 1;
+            }
+            60% {
+                transform: translate(400px, 0) scale(1);
+                opacity: 1;
+            }
+            75% {
+                transform: translate(400px, -75px) scale(1);
+                opacity: 1;
+            }
+            90% {
+                transform: translate(400px, 0) scale(1);
+                opacity: 1;
+            }
+            95% {
+                transform: translate(400px, -25px) scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(400px, 0) scale(1);
+                opacity: 0;
+            }
+        }
+
+        h4 {
+            color: #003E39; /* Updated text color */
+            font-size: 20px; /* Match button font size */
+            font-family: 'YourFontName', sans-serif; /* Apply custom font to h4 */
+        }
+
+    </style>
+</head>
+<body>
+    <button class="button">Who Works at Kitt?!! 🎉</button>
+    <h4>@alicap</h4>
+
+    <script>
+        // Replace these with your image file names
+        const images = [
+            'emoji1.png',
+            'emoji2.png',
+            'emoji3.png',
+            'emoji4.png',
+            'emoji5.png',
+        ];
+        
+        const button = document.querySelector('.button');
+        let isLeft = true;
+
+        function createImage(x, y) {
+            const img = document.createElement('img');
+            img.classList.add('popup-image');
+            img.classList.add(isLeft ? 'bounce-left' : 'bounce-right');
+            
+            // Select random image from array
+            img.src = images[Math.floor(Math.random() * images.length)];
+            
+            img.style.left = x + 'px';
+            img.style.top = y + 'px';
+            
+            document.body.appendChild(img);
+            
+            // Toggle direction for next click
+            isLeft = !isLeft;
+            
+            // Remove image after animation
+            setTimeout(() => {
+                img.remove();
+            }, 5000);
+        }
+
+        button.addEventListener('click', (e) => {
+            // Create single image at click position
+            createImage(e.clientX, e.clientY);
+        });
+    </script>
+</body>
+</html>
